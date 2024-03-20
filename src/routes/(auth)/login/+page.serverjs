@@ -1,0 +1,33 @@
+export const actions = {
+    default: async ({ request }) => {
+        const data = await request.formData();
+        const username = data.get('username');
+        const password = data.get('password');
+        console.log(username, password);
+        if (!username) return { status: 400, body: { error: 'Missing sql' } };
+        const response = await fetch('http://192.168.1.8:8083/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password}),
+            mode: 'no-cors',
+            redirect: 'follow'
+        });
+
+        if (!response.ok) {
+            return { status: 500, body: { error: 'Failed to fetch data' } };
+        }
+
+        const dataa = await response.json();
+
+        
+
+        console.log(dataa);
+
+        return {
+            dataa,
+            username,
+        };
+    }
+}
