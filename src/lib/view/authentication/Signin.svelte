@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { createForm } from 'svelte-forms-lib';
 	import {
@@ -17,8 +18,14 @@
 	import * as yup from 'yup';
 	import { DataService } from '../../../config/dataService';
 	import Checkbox from '@components/checkbox/Checkbox.svelte';
-	import { setItem } from '../../utility/localStorageController';
+	import { setItem, removeItem } from '../../utility/localStorageController';
 	const googleIcon = '/img/svg/google-Icon.svg';
+
+	onMount( () => {
+		removeItem('user');
+		removeItem('loggedin');
+		removeItem('access_token');
+	});
 
 	let visible = true;
 	let loader = false;
@@ -47,16 +54,16 @@
 						setItem('user', response.data.data);
 						setItem('loggedin', response.data.loggedin);
 						setItem('access_token', response.data.data.token);
-						goto(`/home-one`);
+						goto(`/dashboard`);
 					}
 					loader = false;
 				})
 				.catch((error) => {
 					console.log(error);
-					setItem('user', 'response.data.data');
-					setItem('loggedin', true);
-					setItem('access_token', 'response.data.data.token');
-					goto(`/home-one`);
+					setItem('user', '');
+					setItem('loggedin', false);
+					setItem('access_token', '');
+					goto(`/login`);
 					loader = false;
 				});
 
@@ -73,7 +80,7 @@
 				<Col xxl="3" md="6" sm="8">
 					<div class="edit-profile">
 						<div class="edit-profile__logos">
-							<img src="/img/logo-dark.svg" class="svg" alt="" />
+							<img src="/img/hp.png" class="svg" alt="" />
 						</div>
 						<Card class="border-0">
 							<!-- {#if loader}
@@ -81,7 +88,7 @@
 							{/if} -->
 							<CardHeader>
 								<div class="edit-profile__title">
-									<h6>Sign in HexaDash</h6>
+									<h6>Sign in</h6>
 								</div>
 							</CardHeader>
 							<CardBody>
@@ -151,35 +158,7 @@
 									</div>
 								</form>
 							</CardBody>
-							<div class="px-20">
-								<p class="social-connector social-connector__admin text-center">
-									<span>Or</span>
-								</p>
-								<div class="button-group d-flex align-items-center justify-content-center">
-									<ul class="admin-socialBtn">
-										<li>
-											<Button class="btn text-dark google">
-												<img src={googleIcon} class="svg" alt="" />
-											</Button>
-										</li>
-										<li>
-											<Button class=" radius-md wh-48 content-center facebook">
-												<i class="uil uil-facebook-f" />
-											</Button>
-										</li>
-										<li>
-											<Button class="radius-md wh-48 content-center twitter">
-												<i class="uil uil-twitter" />
-											</Button>
-										</li>
-										<li>
-											<Button class="radius-md wh-48 content-center github">
-												<i class="uil uil-github" />
-											</Button>
-										</li>
-									</ul>
-								</div>
-							</div>
+						
 							<div class="admin-bottom">
 								<p class="mb-0">
 									Don't have an account?

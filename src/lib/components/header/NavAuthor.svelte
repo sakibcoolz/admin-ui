@@ -7,7 +7,7 @@
 		setItem('user', '');
 		setItem('loggedin', false);
 		setItem('access_token', '');
-		goto(`/signin`);
+		goto(`/login`);
 	};
 </script>
 

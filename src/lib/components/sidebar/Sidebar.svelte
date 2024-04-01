@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Svroller } from 'svrollbar';
 	import { page } from '$app/stores';
-	import { direction } from '../../store/direction.js';
+	// import { direction } from '../../store/direction.js';
 
 	let urlPath;
 	$: urlPath = $page.url.pathname;

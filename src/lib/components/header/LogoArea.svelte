@@ -4,7 +4,7 @@
 
 <div class="logo-area">
 	<NavbarBrand href={'#'}>
-		<img class="dark" src="/img/logo-dark.svg" alt="svg" />
+		<img class="dark" src="/img/hp_hori.png" alt="svg" />
 		<img class="light" src="/img/logo-white.svg" alt="img" />
 	</NavbarBrand>
 	<a href={'#'} class="sidebar-toggle">

@@ -8,7 +8,7 @@
 
 	onMount(() => {
 		if (isAuthenticated) {
-			goto(`/home-one`);
+			goto(`/dashboard`);
 		}
 	});
 	afterUpdate(() => {
